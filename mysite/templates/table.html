@@ -1,0 +1,31 @@
+<div class="search_uid">
+  <label for="">Search UID : </label>
+  <input type="text" id="id_keyword" name="id_keyword" />
+</div>
+
+{% load static %}
+<script src="{% static 'js/mouse.js' %}"></script>
+
+<div class="list" style="width:70%;">
+  <table class="table" id="mouses">
+    <thead>
+      <tr>
+        <th>UID</th>
+        <th>Currency</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for mouse in mouse_list %}
+      <tr>
+        <td>{{ mouse.uid }}</td>
+        <td>{{ mouse.currency }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="2" class="text-center bg-warning">No Data.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

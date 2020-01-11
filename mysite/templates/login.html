@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="jumbotron text-center">
+    <h1>Login</h1>
+</div>
+
+
+<form action="/login/" method="POST">
+{% csrf_token %}
+    <label for="uid">UID:</label>
+    <input type="text" name="uid"value="" size="35"> <br />
+
+<input type="submit" value="Login">
+
+{% if  request.session.login_status == False %}
+<div>
+  message:Your UID is not correct.
+
+</div>
+{% endif %}
+</form>
+
+{% endblock %}

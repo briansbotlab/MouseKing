@@ -1,0 +1,27 @@
+<li class="nav-item dropdown">
+    <a id="dropdownMenuIcon" class="nav-link"
+    href="#" role="button" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false" v-pre>
+        <span class="glyphicon glyphicon-bell"></span>
+        {% if  request.session.notification_num > 0 %}
+        <span class="badge badge-light">{{ request.session.notification_num }}</span>
+        {% endif %}
+    </a>
+    <ul class="dropdown-menu">
+
+      {% if  request.session.notification_num == 0 %}
+        <li><a class="dropdown-item" href="#">
+            There is no notification.
+        </a></li>
+      {% else %}
+        {% for notification in notification_list %}
+          <li><a class="dropdown-item" href="#">
+              {{  notification.context }}
+          </a></li>
+        {% endfor %}
+
+        <li><a class="dropdown-item" href="#"
+        style="color:white; background-color:#868e96; text-align: center;">Delete all notifications.</a></li>
+      {% endif %}
+    </ul>
+</li>

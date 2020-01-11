@@ -1,0 +1,13 @@
+https://djangogirlstaipei.gitbooks.io/django-girls-taipei-tutorial/django/installation.html
+
+mouseking_venv\Scripts\activate
+
+
+python manage.py shell
+
+
+python manage.py makemigrations
+python manage.py migrate
+
+
+python manage.py runserver
