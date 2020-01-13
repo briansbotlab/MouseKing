@@ -1,16 +1,21 @@
 from django.shortcuts import render
 
 from django.http import HttpResponse
-from .models import Mouse
+from .models import Mouse,Transaction
 from django.shortcuts import redirect
 from django.http import JsonResponse
 from django.core import serializers
+from django.db.models import Sum
+
 import numpy as np
 from . import login
 from . import logout
 from . import register
 from . import notify
 from . import chart
+
+def redirect_to_index():
+    return redirect('/')
 
 def ajax_search_mouse(request):
     if request.method == 'GET':
@@ -20,23 +25,23 @@ def ajax_search_mouse(request):
             qs_json = serializers.serialize('json', mouse_list)
             return HttpResponse(qs_json, content_type='application/json')
 
-
-
 def show_chart(request):
-    x = np.arange(0.0, 2.0, 0.01)
-    y = np.sin(2*np.pi*x)
+    x = Transaction.objects.values_list('create_at', flat=True)
+    y = list(Transaction.objects.values_list('amount', flat=True))
+
+    for i in range(len(y)):
+        if i != 0:
+            y[i] += y[i-1]
+
     buffer_value,content_type = chart.create_chart(
     request,
     x=x,
     y=y,
     x_label="Time",
     y_label="Currency",
-    chart_title="Mouse Currency")
+    chart_title="Transaction Currency")
 
     return HttpResponse(buffer_value, content_type=content_type)
-
-def redirect_to_index():
-    return redirect('/')
 
 def render_to_login(request):
     return render(request, 'login.html')

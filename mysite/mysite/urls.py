@@ -16,7 +16,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include, url
 from django.contrib import admin
-from trips.views import hello_world
 from trap.views import index, login_view, logout_view, register_view, n_del_all, ajax_search_mouse, show_chart
 
 urlpatterns = [
@@ -24,7 +23,6 @@ urlpatterns = [
     url(r'^show_chart/$', show_chart),
     url(r'^index/search/$', ajax_search_mouse),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^hello/$', hello_world),
     url(r'^login/$', login_view),
     url(r'^logout/$', logout_view),
     url(r'^register/$', register_view),

@@ -6,27 +6,26 @@ def transaction_error_handler(request):
     #error happend
     pass
 
-def transfer_currency(from,to,amount):
-    from_m = Mouse.objects.get(uid=from)
-    to_m = Mouse.objects.get(uid=to)
-    if from_m.currency > amount:
-        from_m.currency = from_m.currency - amount
-        to_m.currency = to_m.currency + amount
-        from_m.save()
-        to_m.save()
+def transfer_currency(from_m,to_m,amount):
+    from_m_o = Mouse.objects.get(uid=str(from_m.uid))
+    to_m_o = Mouse.objects.get(uid=str(to_m.uid))
+    if from_m_o.currency > amount:
+        from_m_o.currency = from_m_o.currency - amount
+        to_m_o.currency = to_m_o.currency + amount
+        from_m_o.save()
+        to_m_o.save()
     else:
         #do not have enough currency
         pass
 
-def create_transaction(from,to,amount):
+def create_transaction(from_m,to_m,amount):
     t = Transaction(
-        from_mouse = from,
-        to_mouse = to,
+        from_mouse = from_m,
+        to_mouse = to_m,
         amount = amount)
     t.save()
 
 
-def new_sub_profit(super,sub):
-    amount = 10
-    create_transaction(from = sub,to = super,amount = amount)
-    transfer_currency(from = sub,to = super,amount = amount)
+def transfer_handler(from_m,to_m,amount):
+    create_transaction(from_m = from_m,to_m = to_m,amount = amount)
+    transfer_currency(from_m = from_m,to_m = to_m,amount = amount)
