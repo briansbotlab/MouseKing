@@ -39,7 +39,7 @@ def show_chart(request):
     y=y,
     x_label="Time",
     y_label="Currency",
-    chart_title="Transaction Currency")
+    chart_title="The Cumulative Transaction Currency")
 
     return HttpResponse(buffer_value, content_type=content_type)
 
@@ -52,6 +52,7 @@ def render_to_register(request):
 def index(request):
     mouse_list = Mouse.objects.all().order_by('-currency')
     if ('login_status'  in request.session) and (request.session['login_status']):
+        request.session['notification_num'] = notify.get_notification_num(request.session['uid'])
         notification_list = notify.get_notifications(request.session['uid'])
         return render(request, 'index.html', {
             'mouse_list': mouse_list,
@@ -83,5 +84,5 @@ def register_view(request):
 
 def n_del_all(request):
     uid = request.session['uid']
-    notify.del_all_notification()
+    notify.del_all_notification(uid)
     return redirect_to_index()

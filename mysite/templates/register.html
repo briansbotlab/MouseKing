@@ -1,23 +1,42 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="row justify-content-center align-items-center">
+
 <div class="jumbotron text-center">
     <h1>Register</h1>
 </div>
 
 
-<form action="/register/" method="POST">
-{% csrf_token %}
-    <label for="uid">UID:</label>
-    <input type="text" name="uid"value="" size="35"> <br />
+    <form action="/register/" method="POST" class="form-inline">
+    {% csrf_token %}
+        <label for="uid">UID:</label>
 
-<input type="submit" value="Register">
 
-{% if  request.session.login_status == False %}
-<div>
-  message:This UID is not correct.
-</div>
-{% endif %}
+    {% if  request.session.login_status == False %}
+    <div class="form-group has-error has-feedback">
+
+      <input type="text" name="uid"value="" size="35" class="form-control">
+      <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+
+      <div style="color:red;">
+        The UID is not correct.
+      </div>
+
+    </div>
+
+    {% else %}
+    <div class="form-group">
+
+      <input type="text" name="uid"value="" size="35" class="form-control">
+
+    </div>
+
+    {% endif %}
+    <div class="form-group">
+      <input type="submit" value="Register" class="btn btn-primary">
+    </div>
 
 </form>
 
+</div>
 {% endblock %}

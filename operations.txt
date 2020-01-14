@@ -17,3 +17,10 @@ git add .
 git commit -m 'Update'
 git remote add origin git@github.com:briansbotlab/MouseKing.git
 git push -u -f origin master
+
+
+pip freeze > requirements.txt
+cat requirements.txt
+
+
+pip install -r requirements.txt

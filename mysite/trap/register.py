@@ -6,7 +6,7 @@ from . import transfer
 
 def register_error_handler(request):
         request.session['login_status'] = False
-        views.render_to_login(request)
+        return views.render_to_register(request)
 
 def register_handler(request):
     if validaters.validate_uuid4(request.POST['uid']):
@@ -38,7 +38,7 @@ def register_handler(request):
             return views.redirect_to_index()
 
         except Mouse.DoesNotExist:
-            register_error_handler(request)
+            return register_error_handler(request)
 
     else:
-        register_error_handler(request)
+        return register_error_handler(request)
