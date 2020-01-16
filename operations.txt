@@ -1,26 +1,15 @@
-https://djangogirlstaipei.gitbooks.io/django-girls-taipei-tutorial/django/installation.html
-
-mouseking_venv\Scripts\activate
-
-
+#into python shell
 python manage.py shell
 
-
+#upadate migrations
 python manage.py makemigrations
 python manage.py migrate
 
-
+#run django in localhost
 python manage.py runserver
 
-git init
-git add .
-git commit -m 'Update'
-git remote add origin git@github.com:briansbotlab/MouseKing.git
-git push -u -f origin master
-
-
+#make a requirements text file
 pip freeze > requirements.txt
-cat requirements.txt
 
-
+#install the required packages
 pip install -r requirements.txt
