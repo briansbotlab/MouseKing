@@ -2,7 +2,7 @@ backcall==0.1.0
 colorama==0.4.3
 cycler==0.10.0
 decorator==4.4.1
-Django==1.8.19
+Django==2.2.24
 ipython==7.11.1
 ipython-genutils==0.2.0
 jedi==0.15.2
